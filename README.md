@@ -39,7 +39,7 @@ export EXPOSED_HOSTNAME=innerip
 
       ```sql
       CREATE TABLE queue (
-       	ind UInt64,
+           ind UInt64,
            artist String,
            url_spotify String,
            track String,
@@ -77,7 +77,7 @@ export EXPOSED_HOSTNAME=innerip
        kafka_skip_broken_messages = 1;
        
        CREATE TABLE spotify_youtube on cluster cluster_1 (
-       	ind UInt64,
+           ind UInt64,
            artist String,
            url_spotify String,
            track String,
