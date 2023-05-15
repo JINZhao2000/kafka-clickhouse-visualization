@@ -1,21 +1,31 @@
 # Kafka-Clickhouse-Visualisation
 
+## Modify ip config
+1. `clickhouse/clickhouse_config.xml` line 66
+2. `grafana/provisioning/datasources/clickhhouse.yml` line 8
+3. `kafka-producer.py` line 3
+4. This file line 19, 24, 71
+
+In visual machine, do
+```bash
+export EXPOSED_HOSTNAME=innerip
+```
 ## Preparation
 
 1.   Kafka
 
      >   Kafka manager
      >
-     >   aliyunserver:9000
+     >   publicip:9000
      >
      >   Add cluster
      >
      >   -   name: spotify-youtube
-     >   -   zk: aliyunserver:2181
+     >   -   zk: publicip:2181
      >   -   enable JMX
      >
 
-     Dans container kafka
+     In container kafka
 
      ```bash
      docker exec -it kafka bash
@@ -25,7 +35,7 @@
      ./bin/kafka-topics.sh --list --zookeeper zookeeper:2181
      ```
 
-2.    Dans clickhouse
+2.    In clickhouse
 
       ```sql
       CREATE TABLE queue (
@@ -58,7 +68,7 @@
            stream UInt64
        ) ENGINE = Kafka
        SETTINGS
-       kafka_broker_list = '172.17.60.3:9092',
+       kafka_broker_list = 'innerip:9092',
        kafka_topic_list = 'spotify-youtube',
        kafka_group_name = 'group1',
        kafka_format = 'CSV',
@@ -105,9 +115,19 @@
 
 ## Import data
 
-Dans le répertoire
+In the remote machine
 
 ```bash
  # pip3 install kafka-python
  python3 kafka-producer.py
 ```
+
+## Run
+1. modify all config of ip
+2. copy this directory to remote machine
+3. export EXPOSED_HOSTNAME as your inner ip address
+4. use `docker compose create`
+5. use `docker compose start`
+6. do the part of preparation
+7. do import data
+8. visualize in grafana

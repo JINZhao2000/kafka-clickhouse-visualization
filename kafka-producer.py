@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 
-producer = KafkaProducer(bootstrap_servers='aliyunserver:9092')
+producer = KafkaProducer(bootstrap_servers='innerip:9092')
 f = open('./kdata/spotify_youtube.csv', 'r')
 f.readline()
 l = f.readline()

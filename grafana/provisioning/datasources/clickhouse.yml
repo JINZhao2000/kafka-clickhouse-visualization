@@ -5,7 +5,7 @@ datasources:
     jsonData:
       defaultDatabase: default
       port: 9001
-      server: 172.17.60.3
+      server: innerip
       username: default
       tlsSkipVerify: false
     secureJsonData:
