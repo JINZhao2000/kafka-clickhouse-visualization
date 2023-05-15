@@ -40,6 +40,7 @@ services:
       - zookeeper
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./kdata:/kdata
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=${EXPOSED_HOSTNAME}:2181
       - KAFKA_ADVERTISED_HOST_NAME=${EXPOSED_HOSTNAME}
